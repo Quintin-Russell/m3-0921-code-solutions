@@ -1,6 +1,6 @@
-import { noop } from './noop';
-import { toArray } from './to-array';
-import { createElement } from './create-element';
+import noop from './noop.js';
+import toArray from './to-array.js';
+import createElement from './create-element.js';
 
 export {
   noop,
