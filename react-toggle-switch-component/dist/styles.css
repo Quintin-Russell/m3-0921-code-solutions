@@ -1,0 +1,40 @@
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  width: 15rem;
+  border: 0.1rem solid black;
+  border-radius: 30%;
+}
+
+.on {
+  justify-content: end;
+  background-color: green;
+}
+
+.off {
+  justify-content: flex-start;
+  background-color: rgb(233, 230, 230);
+}
+
+.slider {
+  height: 4.5rem;
+  width: 4.5rem;
+  border-radius: 60%;
+  background-color: cornsilk;
+  border: 0.1rem solid rgb(173, 173, 173);
+}
+
+.text {
+  font-size: 3rem;
+  font-weight: 800;
+  padding: 2rem;
+  letter-spacing: 0.1rem;
+}
