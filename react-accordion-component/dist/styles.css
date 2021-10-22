@@ -1,0 +1,19 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.content-cont {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.border {
+  border-radius: 0.25rem;
+  border: 0.1rem solid black;
+  padding-left: 1rem;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
