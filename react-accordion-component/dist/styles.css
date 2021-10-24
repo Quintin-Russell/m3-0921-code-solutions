@@ -12,6 +12,10 @@
   margin: 0;
 }
 
+.content-cont:hover {
+  cursor: pointer;
+}
+
 .border {
   border-radius: 0.25rem;
   border: 0.1rem solid black;
@@ -25,5 +29,9 @@
 }
 
 .hidden {
-  display: hidden !important;
+  display: none;
+}
+
+.dsp-inh {
+  display: inherit;
 }
