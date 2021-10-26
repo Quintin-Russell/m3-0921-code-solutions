@@ -1,59 +1,12 @@
 import React from 'react';
 
-// class Arrow extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-
-//   handleClick(e) {
-//     this.props.passETarId(e.target.id);
-//   }
-
-//   right() {
-//     this.props.
-//   }
-
-//   render() {
-//     return (
-//         <i onClick={this.handleClick} className="arrow fas fa-chevron-left"></i>
-//     );
-//   }
-// }
-
-// class DotRow extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.imgArr = props.imgArr;
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-
-//   handleClick(e) {
-//     this.props.passETarIdDot(e.target.id)
-//   }
-
-//   renderDots() {
-//     let index = 0;
-//     const dotLiArr = this.imgArr.map(img => {
-//       <li onClick={this.handleClick}>
-//         <i className="fas fa-circle"></i>
-//       </li>
-//     })
-//   }
-
-//   render() {
-//     return(
-
-//     )
-//   }
-// }
-
 export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.imgArr = props.imgArr;
     this.nextImg = this.nextImg.bind(this);
     this.prevImg = this.prevImg.bind(this);
+    this.imgArr = props.imgArr;
     this.handleClickDot = this.handleClickDot.bind(this);
     this.state = {
       currentImg: 0
@@ -73,7 +26,7 @@ export default class Carousel extends React.Component {
   }
 
   handleClickDot(e) {
-    const tar = e.target.id;
+    const tar = parseInt(e.target.id);
     this.setState({ currentImg: tar });
   }
 
@@ -82,8 +35,7 @@ export default class Carousel extends React.Component {
     const dotLiArr = this.imgArr.map(img => {
       const dot =
       <li onClick={this.handleClickDot} key={index.toString()}>
-          <i className='fas fa-circle' id={index}></i>
-        {/* <i className={() => { return this.state.currentImg === index ? 'fas fa-circle' : 'far fa-circle'; } } id={index}></i> */}
+        <i className={this.state.currentImg === index ? 'fas fa-circle' : 'far fa-circle'} id={index}></i>
       </li>;
       index++;
       return dot;
@@ -95,6 +47,27 @@ export default class Carousel extends React.Component {
     );
   }
 
+  renderPhoto() {
+    const photoIndex = this.state.currentImg;
+    const photo = this.imgArr[photoIndex];
+    return (
+      <div className="img-cont">
+        <img src={photo.src} alt={photo.alt} className="image"/>
+        </div>
+    );
+  }
+
+  componentDidMount() {
+    this.timerId = setInterval(
+      () => this.nextImg(),
+      3000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+
   render() {
     return (
       <div className='row'>
@@ -103,6 +76,7 @@ export default class Carousel extends React.Component {
       </div>
 
       <div className="flex-col-center">
+        {this.renderPhoto()}
         {this.renderDots()}
       </div>
 
