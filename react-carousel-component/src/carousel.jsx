@@ -15,13 +15,15 @@ export default class Carousel extends React.Component {
 
   nextImg() {
     let next = this.state.currentImg;
-    (next === 4) ? next = 0 : next++;
+    (next === this.imgArr.length - 1) ? next = 0 : next++;
     this.setState({ currentImg: next });
   }
 
   prevImg() {
     let prev = this.state.currentImg;
-    (prev === 0) ? prev = 4 : prev--;
+    (prev === 0)
+      ? prev = this.imgArr.length - 1
+      : prev--;
     this.setState({ currentImg: prev });
   }
 
@@ -32,7 +34,7 @@ export default class Carousel extends React.Component {
 
   renderDots() {
     let index = 0;
-    const dotLiArr = this.imgArr.map(img => {
+    const dotLiArr = this.props.imgArr.map(img => {
       const dot =
       <li onClick={this.handleClickDot} key={index.toString()}>
         <i className={this.state.currentImg === index ? 'fas fa-circle' : 'far fa-circle'} id={index}></i>
