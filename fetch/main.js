@@ -3,7 +3,6 @@ const initObj = {
 };
 
 fetch('https://jsonplaceholder.typicode.com/users', initObj)
-  .then(res => {
-    const resJSON = res.json();
-    console.log(resJSON);
-  });
+  .then(res => res.json())
+  .then(users => console.log(users))
+  .catch(err => console.log('Error!', err));
