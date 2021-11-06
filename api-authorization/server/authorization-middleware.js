@@ -2,6 +2,18 @@ const jwt = require('jsonwebtoken'); // eslint-disable-line
 const ClientError = require('./client-error'); // eslint-disable-line
 
 function authorizationMiddleware(req, res, next) {
+  const userXToken = req.headers['x-access-token'];
+  if (!userXToken) {
+    throw new ClientError(401, 'authentication required');
+  }
+  try {
+    const verifyToken = jwt.verify(userXToken, process.env.TOKEN_SECRET);
+    req.user = verifyToken;
+    next();
+  } catch (err) {
+    next(err);
+  }
+
   /* your code here */
   /**
    * Try to get the 'X-Access-Token' from the req.headers.
