@@ -37,7 +37,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       return db.query(sql, params);
     })
     .then(result => {
-      const response = result.rows;
+      const [response] = result.rows;
       res.status(201).json(response);
     })
     .catch(err => next(err));
