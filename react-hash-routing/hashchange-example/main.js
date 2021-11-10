@@ -4,7 +4,7 @@ var $views = document.querySelectorAll('.view');
 showView(window.location.hash);
 
 window.addEventListener('hashchange', function (event) {
-  console.log('window.location:', window.location);
+  console.log('window.location.hash:', window.location.hash);
   showView(window.location.hash);
 });
 
