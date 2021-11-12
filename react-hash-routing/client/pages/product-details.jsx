@@ -27,6 +27,7 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
+    // console.log('this.state.product (product-details.jsx):', this.state.product);
     if (!this.state.product) return null;
     const {
       name, imageUrl, price, shortDescription, longDescription
