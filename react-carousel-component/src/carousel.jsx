@@ -6,7 +6,7 @@ export default class Carousel extends React.Component {
     this.imgArr = props.imgArr;
     this.nextImg = this.nextImg.bind(this);
     this.prevImg = this.prevImg.bind(this);
-    this.imgArr = props.imgArr;
+    // this.imgArr = props.imgArr;
     this.handleClickDot = this.handleClickDot.bind(this);
     this.state = {
       currentImg: 0
@@ -15,14 +15,14 @@ export default class Carousel extends React.Component {
 
   nextImg() {
     let next = this.state.currentImg;
-    (next === this.imgArr.length - 1) ? next = 0 : next++;
+    (next === this.props.imgArr.length - 1) ? next = 0 : next++;
     this.setState({ currentImg: next });
   }
 
   prevImg() {
     let prev = this.state.currentImg;
     (prev === 0)
-      ? prev = this.imgArr.length - 1
+      ? prev = this.props.imgArr.length - 1
       : prev--;
     this.setState({ currentImg: prev });
   }
@@ -51,7 +51,7 @@ export default class Carousel extends React.Component {
 
   renderPhoto() {
     const photoIndex = this.state.currentImg;
-    const photo = this.imgArr[photoIndex];
+    const photo = this.props.imgArr[photoIndex];
     return (
       <div className="img-cont">
         <img src={photo.src} alt={photo.alt} className="image"/>
