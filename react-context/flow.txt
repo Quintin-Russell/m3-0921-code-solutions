@@ -1,0 +1,28 @@
+**User can sign up.**
+
+the URL when the app opens is set to '.../#sign-in' and thus the renderPage() function
+prompts the <Auth /> page to render. The <Auth /> page is passed its eventHandler function (handleSignIn)
+user object (if one exists), and route from <App /> via this.context. A welcome message is generated based on the
+value of route.path and a form (<Auth-Form />) is rendered. An alternate text is generated based on the value of route.path.
+Upon submitting the form, a POST request is sent to '.../sign-up' with the username and password in the body. On the server-side,
+a route handler hashes the user's password and posts it to the database; returning the user'sId, username and the time the entry was created.
+Upon recieving a successful response from the server, the window.location.hash is changed and the user is prompted to sign in.
+
+**User can sign in.**
+
+With the this.state.route.path set to 'sign-in', the <Auth-Form /> (via the <Auth /> page) is generated, prompting the user to enter their
+username and password. Once the form is submitted, a POST request with the user's username and password is submitted to the '.../sign-in' URL.
+Middleware then queries the database and selects the UserId and hashedPassword from the corresponding username. Argon2.verify is used to verify
+if the user submitted password (which should also be hashed; I did not see any hashing of this in the code) and the hashedPassword in the database
+match. If they do match, a JSON Web Token is sent back to the user with some user information. The server response is verified and then the user's
+JWT is stored to localStorage, the userID and username are stored in an object, and the state of <App /> is updated.
+
+**User can stay signed in (even if they refresh the page).**
+
+When the state is updated above, the componentDidMount() method is called. This method listens for hash changes on the window object and checks the localStorage
+for the JWT that is refenced above. If a JWT is found in localStorage, the token is decoded using the atob() method of the window object. Then, this.state.user
+and this.state.isAuthorizing if the <App /> page are updated to the value of the decoded token and false, respecively.
+
+**User can sign out.**
+
+THe user's JWT is removed from localStorage and this.state of the <App /> page is reset to null.
