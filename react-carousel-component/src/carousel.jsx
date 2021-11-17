@@ -3,10 +3,8 @@ import React from 'react';
 export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
-    this.imgArr = props.imgArr;
     this.nextImg = this.nextImg.bind(this);
     this.prevImg = this.prevImg.bind(this);
-    // this.imgArr = props.imgArr;
     this.handleClickDot = this.handleClickDot.bind(this);
     this.state = {
       currentImg: 0
