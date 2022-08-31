@@ -23,7 +23,6 @@ useEffect(() => {
   //fetch function
   const getAllTodos = async () => {
     const allTodosArray = await fetch('/api/todos')
-    console.log('allTD array fetched', allTodosArray)
     setTodos(allTodosArray)
   }
 
@@ -47,6 +46,17 @@ useEffect(() => {
     * TIP: Use Array.prototype.concat to create a new array containing the contents
     * of the old array, plus the object returned by the server.
     */
+   // fetch function
+   const addNewTodo = async (toDo) => {
+    const req = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(toDo)
+    }
+    const savedTodo = await fetch('/api/todos', req)
+    setTodos([...todos, savedTodo])
+   }
+   addNewTodo(newTodo)
   }
 
   toggleCompleted(todoId) {
