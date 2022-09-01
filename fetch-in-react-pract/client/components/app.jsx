@@ -77,6 +77,30 @@ useEffect(() => {
      * TIP: Be sure to SERIALIZE the updates in the body with JSON.stringify()
      * And specify the "Content-Type" header as "application/json"
      */
+    const changeIsCompleted = async (newStatus) => {
+      const req = {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({isCompleted: newStatus})
+      }
+      const patchedTodo = await fetch(`/api/todos/${todoId}`, req)
+      return patchedTodo
+    }
+
+    const findIndex = (id, array) => {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i]["todoId"] === id) return i
+      }
+      return null
+    }
+
+    const indexOfToDoToChange = findIndex(todoId, todos)
+    const newStatus = !todos[indexOfToDoToChange][isCompleted]
+    const changedTodo = changeIsCompleted(newStatus)
+    const newTodos = [...todos]
+    newTodos[indexOfToDoToChange] = changedTodo
+
+    setTodos(newTodos)
   }
 
   render() {
